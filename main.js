@@ -1,4 +1,13 @@
-let library = [];
+class Library {
+    constructor(...books) {
+        this.books = books;
+    }
+
+    addBook(book) {
+        if(!(book instanceof Book)) throw new TypeError ("You can only add books to the library");
+        this.books.push(book);
+    }
+}
 
 class Book {
     constructor(title, author, pages, isRead) {
@@ -16,6 +25,4 @@ class Book {
     };
 };
 
-function addBooktoLibrary(library, title, author, pages, isRead) {
-    library.push(new Book(title, author, pages, isRead));
-}
+const myLibrary = new Library();
