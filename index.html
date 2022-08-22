@@ -11,7 +11,32 @@
 <body>
     <header>
         <div class="title">Loki's Library</div>
+        <button id="new-book">New Book</button>
     </header>
-    <div class="library"></div>
+    <div class="library">
+        <div id="form-popup">
+            <div class="title">Add a New Book</div>
+            <form>
+                <div class="form-element">
+                    <label for="title">Title</label>
+                    <input type="text" id="title">
+                </div>
+                <div class="form-element">
+                    <label for="author">Author</label>
+                    <input type="text" id="author">
+                </div>
+                <div class="form-element">
+                    <label for="pages">Number of Pages</label>
+                    <input type="number" id="pages">
+                </div>
+                <div class="form-element read">
+                    <label for="read">Have you read this book?</label>
+                    <input type="checkbox" id="read">
+                </div>
+                <button type="submit" id="form-submit">Submit</button>
+                <button type="reset" id="form-close" onclick="closeForm()">Close</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
