@@ -4,8 +4,16 @@
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-body {
+html {
     height: 100vh;
+    width: 100%;
+}
+
+body {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -18,7 +26,9 @@ header {
     padding: 1rem;
     top: 0;
     left: 0;
+    width: 100%;
 }
+
 
 header button {
     padding: 0.25rem 0.5rem;
@@ -31,12 +41,13 @@ header button {
 }
 
 .library {
+    flex: auto;
     height: 100%;
     padding: 2rem;
     background-color: lightgray;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-auto-rows: 300px;
+    grid-template-rows: 300px;
     justify-items: center;
     align-items: start;
     gap: 2rem;
