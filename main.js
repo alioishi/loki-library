@@ -64,19 +64,7 @@ class Book {
             this.author + ", " +
             this.pages + " pages, " +
             (this.isRead) ? "read" : "not read";
-    };
-};
-
-function setUpNewBookButton() {
-    document.querySelector("#new-book").addEventListener("click", openForm);
-}
-
-function openForm() {
-    document.getElementById("form-popup").style.display = "block";
-}
-
-function closeForm() {
-    document.getElementById("form-popup").style.display = "none";
+    }
 }
 
 const myLibrary = new Library();
@@ -91,3 +79,26 @@ myLibrary.addBook(new Book("Monkey King", "Wu Kong", 1000, true));
 myLibrary.displayAllBooks();
 
 setUpNewBookButton();
+
+function setUpNewBookButton() {
+    document.querySelector("#new-book").addEventListener("click", openForm);
+}
+
+function openForm() {
+    document.getElementById("form-popup").style.display = "block";
+}
+
+function closeForm() {
+    document.getElementById("form-popup").style.display = "none";
+}
+
+function submitForm() {
+    const formData = new FormData(document.querySelector("#form-popup form"));
+
+    const book = new Book(formData.get("title"), formData.get("author"), formData.get("pages"), document.querySelector("form #read").checked);
+
+    myLibrary.addBook(book);
+    myLibrary.displayBook(book);
+    closeForm();
+}
+
