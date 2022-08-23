@@ -3,9 +3,9 @@ class Library {
         this.books = books;
     }
 
-    addBook(book) {
-        if(!(book instanceof Book)) throw new TypeError ("You can only add books to the library");
-        this.books.push(book);
+    deleteBook(index) {
+        if(index < 0 || index > this.books.length) throw new RangeError("The index is out of bounds");        
+        this.books.splice(index, 1);
     }
 
     displayBook(book) {
@@ -15,6 +15,7 @@ class Library {
 
         const display = document.createElement("div");
         display.classList.add("book");
+        display.dataset.index = this.books.length - 1;
         
         const title = document.createElement("div");
         title.classList.add("title");
@@ -31,23 +32,51 @@ class Library {
         pages.textContent = book.pages + " pages";
         display.appendChild(pages);
 
-        const isRead = document.createElement("button");
-        isRead.classList.add("is-read");
-        const img = document.createElement("img");
+        const buttons = document.createElement("div");
+        buttons.classList.add("book-buttons");
+
+        const readButton = document.createElement("button");
+        readButton.classList.add("read");
+        const readImg = document.createElement("img");
         if(book.isRead) {
-            img.src = "img/check-circle-outline.svg";
+            readImg.src = "img/check-circle-outline.svg";
         }
         else {
-            img.src = "img/checkbox-blank-circle-outline.svg";
+            readImg.src = "img/checkbox-blank-circle-outline.svg";
         }
-        isRead.appendChild(img);
-        display.appendChild(isRead);
+        readButton.appendChild(readImg);
+        buttons.appendChild(readButton);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.classList.add("delete");
+        deleteButton.dataset.index = this.books.length - 1;
+
+        deleteButton.addEventListener("click", (e) => {
+            const index = parseInt(e.currentTarget.dataset.index);
+            document.querySelector(`.book[data-index="${index}"]`).remove();
+            this.deleteBook(index);
+
+            for(let i = index; i < this.books.length; i++) {
+                const book = document.querySelector(`.book[data-index="${i + 1}"]`);
+                book.dataset.index = i;
+                book.querySelector(".delete").dataset.index = i;
+            }
+        });
+
+        const deleteImg = document.createElement("img");
+        deleteImg.src = "img/delete-outline.svg";
+        deleteButton.appendChild(deleteImg);
+
+        buttons.appendChild(deleteButton);
+        display.appendChild(buttons);
 
         library.appendChild(display);
     }
 
-    displayAllBooks() {
-        this.books.forEach(this.displayBook);
+    addBook(book) {
+        if(!(book instanceof Book)) throw new TypeError ("You can only add books to the library");
+        this.books.push(book);
+        this.displayBook(book);
     }
 }
 
@@ -76,7 +105,6 @@ myLibrary.addBook(new Book("Monkey King", "Wu Kong", 1000, false));
 myLibrary.addBook(new Book("Monkey King", "Wu Kong", 1000, true));
 myLibrary.addBook(new Book("Monkey King", "Wu Kong", 1000, false));
 myLibrary.addBook(new Book("Monkey King", "Wu Kong", 1000, true));
-myLibrary.displayAllBooks();
 
 setUpNewBookButton();
 
@@ -98,7 +126,6 @@ function submitForm() {
     const book = new Book(formData.get("title"), formData.get("author"), formData.get("pages"), document.querySelector("form #read").checked);
 
     myLibrary.addBook(book);
-    myLibrary.displayBook(book);
     closeForm();
 }
 

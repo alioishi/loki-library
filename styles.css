@@ -29,7 +29,6 @@ header {
     width: 100%;
 }
 
-
 header button {
     padding: 0.25rem 0.5rem;
     font-size: 1rem;
@@ -146,9 +145,23 @@ form button[type=reset] {
     margin-top: auto;
 }
 
+.book .book-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
 .book button {
-    width: 25px;
-    height: 25px;
     border: none;
-    background-color: none;
+    background-color: white;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+}
+
+.book button img {
+    border-radius: 50%;
+}
+
+.book button:hover {
+    filter: brightness(0.8);
 }
