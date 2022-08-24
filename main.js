@@ -111,14 +111,6 @@ class Book {
 }
 
 const myLibrary = new Library();
-myLibrary.addBook(new Book("Monkey King", "Wu Kong", 1000, false));
-myLibrary.addBook(new Book("Monkey King", "Wu Kong", 1000, true));
-myLibrary.addBook(new Book("Monkey King", "Wu Kong", 1000, false));
-myLibrary.addBook(new Book("Monkey King", "Wu Kong", 1000, true));
-myLibrary.addBook(new Book("Monkey King", "Wu Kong", 1000, false));
-myLibrary.addBook(new Book("Monkey King", "Wu Kong", 1000, true));
-myLibrary.addBook(new Book("Monkey King", "Wu Kong", 1000, false));
-myLibrary.addBook(new Book("Monkey King", "Wu Kong", 1000, true));
 
 setUpNewBookButton();
 
@@ -132,6 +124,7 @@ function openForm() {
 
 function closeForm() {
     document.getElementById("form-popup").style.display = "none";
+    document.querySelector("#form-popup form").reset();
 }
 
 function submitForm() {
