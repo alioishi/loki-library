@@ -40,15 +40,14 @@ header button {
 }
 
 .library {
-    flex: auto;
+    flex: 1;
     height: 100%;
     padding: 2rem;
     background-color: lightgray;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, 200px);
     grid-template-rows: 300px;
     justify-items: center;
-    align-items: start;
     gap: 2rem;
 }
 
