@@ -36,21 +36,29 @@ class Library {
         buttons.classList.add("book-buttons");
 
         const readButton = document.createElement("button");
-        readButton.classList.add("read");
-        const readImg = document.createElement("img");
         if(book.isRead) {
-            readImg.src = "img/check-circle-outline.svg";
+            readButton.classList.add("read");
         }
         else {
-            readImg.src = "img/checkbox-blank-circle-outline.svg";
+            readButton.classList.add("not-read");
         }
+
+        readButton.dataset.index = this.books.length - 1;
+        readButton.addEventListener("click", (e) => {
+            e.currentTarget.classList.toggle("read");
+            e.currentTarget.classList.toggle("not-read");
+            this.books[e.currentTarget.dataset.index].isRead = !this.books[e.currentTarget.dataset.index].isRead;
+        });
+
+        const readImg = document.createElement("img");
         readButton.appendChild(readImg);
         buttons.appendChild(readButton);
+        
 
         const deleteButton = document.createElement("button");
         deleteButton.classList.add("delete");
-        deleteButton.dataset.index = this.books.length - 1;
 
+        deleteButton.dataset.index = this.books.length - 1;
         deleteButton.addEventListener("click", (e) => {
             const index = parseInt(e.currentTarget.dataset.index);
             document.querySelector(`.book[data-index="${index}"]`).remove();
@@ -60,6 +68,12 @@ class Library {
                 const book = document.querySelector(`.book[data-index="${i + 1}"]`);
                 book.dataset.index = i;
                 book.querySelector(".delete").dataset.index = i;
+                if(book.querySelector(".read") != null) {
+                    book.querySelector(".read").dataset.index = i;
+                }
+                if(book.querySelector(".is-read") != null) {
+                    book.querySelector(".is-read").dataset.index = i;
+                }
             }
         });
 

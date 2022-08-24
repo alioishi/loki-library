@@ -165,3 +165,11 @@ form button[type=reset] {
 .book button:hover {
     filter: brightness(0.8);
 }
+
+button.read img{
+    content: url("img/check-circle-outline.svg");
+}
+
+button.not-read img{
+    content: url("img/checkbox-blank-circle-outline.svg");
+}
